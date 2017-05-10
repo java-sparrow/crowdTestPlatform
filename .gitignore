@@ -20,4 +20,10 @@ hs_err_pid*
 !.vscode/launch.json
 
 
+# Eclipse 项目的配置文件
+.classpath
+.project
+.settings/
+
+
 # 自定义的忽略规则写在下面
