@@ -18,3 +18,6 @@ Q: 如何在 **Tomcat** 服务器中添加项目？
 
 Q: 如何启动我的JavaEE项目？
 > A: 在Eclipse下面的 **Servers** 面板中，右键 -> `Start` （需要先将项目添加到 `Server` 中），等 `Console` 面板中出现 `信息: Server startup in xxxx ms` 后，访问 http://localhost:8080/项目名/ 即可访问 _/WebContent/_ 目录中的内容。
+
+Q: 如何在 Eclipse 中添加外部的 `jar` 包？
+> A: 可以在 `Java Build Path` 中配置，也可以直接拷贝到 _/WebContent/WEB-INF/lib_ 中，Eclipse 会自动识别。
