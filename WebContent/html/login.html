@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>登录</title>
+
+<style type="text/css">
+	form input {
+		display: block;
+		width: 60%;
+		margin: 20px auto;
+		height: 30px;
+		line-height: 30px;
+		font-size: 16px;
+		text-indent: 1em;
+	}
+	.submit-button {
+		text-indent: 0;
+	}
+</style>
+
+</head>
+<body>
+	<div style="width: 400px; margin: 100px auto 0; padding: 10px 0 30px; border: 1px solid gray;">
+		<form action="../login" method="post">
+			<h2 style="text-align: center;">用 户 登 录</h2>
+			<p>
+				<input type="text" name="username" placeholder="用户名">
+			</p>
+			<p>
+				<input type="password" name="password" placeholder="密码">
+			</p>
+			<p>
+				<input type="submit" value="登 录" class="submit-button">
+			</p>
+		</form>
+	</div>
+</body>
+</html>
