@@ -70,7 +70,7 @@ public class UserDao extends BaseDao {
 		
 		try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 			preparedStatement.setString(1, userData.getUsername());
-			preparedStatement.setString(1, userData.getPassword());
+			preparedStatement.setString(2, userData.getPassword());
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
