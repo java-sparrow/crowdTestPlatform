@@ -45,6 +45,13 @@ public class UserDao extends BaseDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return userList;
@@ -61,9 +68,7 @@ public class UserDao extends BaseDao {
 		
 		String sql = "select * from " + tableName + " where username = ? and password = ?";
 		
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			
+		try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 			preparedStatement.setString(1, userData.getUsername());
 			preparedStatement.setString(1, userData.getPassword());
 			
@@ -94,9 +99,7 @@ public class UserDao extends BaseDao {
 		
 		String sql = "select * from " + tableName + " where id = ?";
 		
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			
+		try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 			preparedStatement.setInt(1, id);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
