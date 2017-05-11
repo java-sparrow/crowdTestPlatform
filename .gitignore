@@ -24,6 +24,7 @@ hs_err_pid*
 .classpath
 .project
 .settings/
+build/
 
 
 # 自定义的忽略规则写在下面
