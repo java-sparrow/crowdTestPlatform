@@ -29,4 +29,20 @@ public class MyUtil {
 		
 		return null;
 	}
+	
+	/**
+	 * 判断参数是否为空字符串
+	 * @param string 需要判断的字符串
+	 * @return 当字符串为null 或 字符串trim()之后的长度为0，则返回 true。其它情况返回 false。
+	 */
+	public static Boolean isEmptyString(String string) {
+		if (string == null) {
+			return true;
+		}
+		else if (string.trim().isEmpty()) {
+			return true;
+		}
+		
+		return false;
+	}
 }
