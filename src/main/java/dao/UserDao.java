@@ -117,4 +117,62 @@ public class UserDao extends BaseDao {
 		
 		return userBo;
 	}
+	
+	/**
+	 * 根据 用户名 查找
+	 * @param username 用户名
+	 * @return 匹配查询结果的用户对象。
+	 * 			<br>当无查询结果 或 发生异常时，返回 null
+	 */
+	public UserBo queryUserByName(String username) {
+		UserBo userBo = null;
+		
+		String sql = "select * from " + tableName + " where username = ?";
+		
+		try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setString(1, username);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			ArrayList<UserBo> userList = convertResultSetToUserList(resultSet);
+			
+			if (userList.size() > 0) {
+				userBo = userList.get(0);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return userBo;
+	}
+	
+	/**
+	 * 新增用户
+	 * @param userData 用户数据对象
+	 * @return 新增成功时，返回 true。<br>
+	 * 			新增失败时，返回 false。
+	 */
+	public Boolean addUser(UserBo userData) {
+		Boolean isInserted = false;
+		String sql = "insert into " + tableName + " (username, password) values (?, ?)";
+		
+		try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setString(1, userData.getUsername());
+			preparedStatement.setString(2, userData.getPassword());
+			
+			int resultRows = preparedStatement.executeUpdate();
+			
+			if (resultRows == 1) {
+				isInserted = true;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return isInserted;
+	}
 }
