@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.bo.UserBo;
 import main.java.service.UserService;
+import main.java.util.APIObject;
 
 /**
  * Servlet implementation class LoginServlet
@@ -31,13 +32,19 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("请使用 POST 方式登录");
+		response.setCharacterEncoding("utf-8");
+		
+		APIObject apiObject = new APIObject("请使用 POST 方式登录");
+		
+		response.getWriter().append(apiObject.toJSON());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("utf-8");
+		
 		UserBo userData = new UserBo();
 		
 		userData.setUsername(request.getParameter("username"));
@@ -48,16 +55,21 @@ public class LoginServlet extends HttpServlet {
 		UserBo loginUser = userService.queryUser(userData);
 		
 		if (loginUser != null) {
-			System.out.printf("用户 [%s] 登录成功，跳转到 loginSuccess.jsp \n", userData.getUsername());
+			System.out.printf("用户 [%s] 登录成功 \n", userData.getUsername());
 			
 			request.getSession().setAttribute("loginUser", loginUser);
-			request.getRequestDispatcher("loginSuccess.jsp").forward(request, response);
+			
+			APIObject apiObject = new APIObject();
+			apiObject.setMessage("登录成功");
+			
+			response.getWriter().append(apiObject.toJSON());
 		}
 		else {
 			System.out.println("登录失败");
 			
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().append("用户名或密码错误，请重新登录");
+			APIObject apiObject = new APIObject("用户名或密码错误，请重新登录");
+			
+			response.getWriter().append(apiObject.toJSON());
 		}
 	}
 
