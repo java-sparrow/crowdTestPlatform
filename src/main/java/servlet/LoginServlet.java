@@ -32,8 +32,6 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("utf-8");
-		
 		APIObject apiObject = new APIObject("请使用 POST 方式登录");
 		
 		response.getWriter().append(apiObject.toJSON());
@@ -43,8 +41,6 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("utf-8");
-		
 		UserBo userData = new UserBo();
 		
 		userData.setUsername(request.getParameter("username"));
