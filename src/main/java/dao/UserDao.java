@@ -22,25 +22,35 @@ public class UserDao extends BaseDao {
 	 * 用户表名
 	 */
 	private static String tableName = "t_user";
+
+	/**
+	 * 将数据库结果集对象 ResultSet 中的字段 转换为 UserBo 的属性，并返回 UserBo
+	 * @param resultSet 数据库结果集对象
+	 * @return 用户对象
+	 * @throws SQLException 当无法从 ResultSet 中获取字段值时，抛出该异常
+	 */
+	private static UserBo convertResultSetToUserBo(ResultSet resultSet) throws SQLException {
+		UserBo userBo = new UserBo();
+		
+		userBo.setId(resultSet.getInt("id"));
+		userBo.setUsername(resultSet.getString("username"));
+		userBo.setPassword(resultSet.getString("password"));
+		userBo.setCreateTime(resultSet.getTimestamp("create_time"));
+		
+		return userBo;
+	}
 	
 	/**
-	 * 将数据库结果集对象 ResultSet 转换为 用户对象数组 ArrayList<UserBo>
+	 * 将数据库结果集对象 ResultSet 转换为 用户对象数组 ArrayList< UserBo >
 	 * @param resultSet 数据库结果集对象
 	 * @return 用户对象数组
 	 */
-	private static ArrayList<UserBo> convertResultSetToUserList(ResultSet resultSet) {
+	private static ArrayList<UserBo> getListFromResultSet(ResultSet resultSet) {
 		ArrayList<UserBo> userList = new ArrayList<>();
 		
 		try {
 			while (resultSet.next()) {
-				UserBo userBo = new UserBo();
-				
-				userBo.setId(resultSet.getInt("id"));
-				userBo.setUsername(resultSet.getString("username"));
-				userBo.setPassword(resultSet.getString("password"));
-				userBo.setCreateTime(resultSet.getTimestamp("create_time"));
-				
-				userList.add(userBo);
+				userList.add(convertResultSetToUserBo(resultSet));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -55,6 +65,34 @@ public class UserDao extends BaseDao {
 		}
 		
 		return userList;
+	}
+
+	/**
+	 * 从数据库结果集对象 ResultSet 中，获取第一条记录，并返回转换后的 UserBo
+	 * @param resultSet 数据库结果集对象
+	 * @return 用户对象。
+	 * 			<br>当发生异常时，返回 null
+	 */
+	private static UserBo getFirstFromResultSet(ResultSet resultSet) {
+		UserBo userBo = null;
+		
+		try {
+			if (resultSet.next()) {
+				userBo = convertResultSetToUserBo(resultSet);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return userBo;
 	}
 	
 	/**
@@ -74,11 +112,7 @@ public class UserDao extends BaseDao {
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
-			ArrayList<UserBo> userList = convertResultSetToUserList(resultSet);
-
-			if (userList.size() > 0) {
-				userBo = userList.get(0);
-			}
+			userBo = getFirstFromResultSet(resultSet);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -104,11 +138,7 @@ public class UserDao extends BaseDao {
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
-			ArrayList<UserBo> userList = convertResultSetToUserList(resultSet);
-			
-			if (userList.size() > 0) {
-				userBo = userList.get(0);
-			}
+			userBo = getFirstFromResultSet(resultSet);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -134,11 +164,7 @@ public class UserDao extends BaseDao {
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
-			ArrayList<UserBo> userList = convertResultSetToUserList(resultSet);
-			
-			if (userList.size() > 0) {
-				userBo = userList.get(0);
-			}
+			userBo = getFirstFromResultSet(resultSet);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
