@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import main.java.bo.UserBo;
+import main.java.constant.SessionAttributeConst;
 import main.java.util.APIObject;
 
 /**
@@ -40,11 +41,8 @@ public class B_AuthFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		System.out.println("权限 Filter 校验：");
 		
-		String loginUserFieldName = "loginUser";
-		String loginUserIdFieldName = "loginUserId";
-		
 		HttpSession session = ((HttpServletRequest) request).getSession();
-		UserBo loginUser = (UserBo) session.getAttribute(loginUserFieldName);
+		UserBo loginUser = (UserBo) session.getAttribute(SessionAttributeConst.LOGIN_USER_FIELD_NAME);
 		
 		if (loginUser == null) {
 			System.out.println("权限校验【不通过】");
@@ -59,8 +57,8 @@ public class B_AuthFilter implements Filter {
 		System.out.println("权限校验【通过】，已登录用户名为：[" + loginUser.getUsername() + "]");
 		
 		// 保存快捷属性
-		request.setAttribute(loginUserFieldName, loginUser);
-		request.setAttribute(loginUserIdFieldName, loginUser.getId());
+		request.setAttribute(SessionAttributeConst.LOGIN_USER_FIELD_NAME, loginUser);
+		request.setAttribute(SessionAttributeConst.LOGIN_USER_ID_FIELD_NAME, loginUser.getId());
 
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
