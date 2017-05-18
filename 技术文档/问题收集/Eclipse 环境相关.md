@@ -21,3 +21,10 @@ Q: 如何启动我的JavaEE项目？
 
 Q: 如何在 Eclipse 中添加外部的 `jar` 包？
 > A: 可以在 `Java Build Path` 中配置，也可以直接拷贝到 _/WebContent/WEB-INF/lib_ 中，Eclipse 会自动识别。
+
+Q: 如果关联 `Java` 源码，以便在代码编辑器中 可以 `Ctrl + 鼠标左键` 点击进入呢？
+> A: `Ctrl + 鼠标左键` 进入源码界面，如果没有配置的话，默认会出现 **Class File Editor** 界面。
+	此时点击 **Attach Source...** 按钮，在弹出窗口中就可以配置 `Java src` 源文件（即 JDK 安装目录里的 _src.zip_ 文件）了。  
+	如果关联的是 `Servlet` 源码，则需先下载 [Tomcat 源码](再按上面的操作配置源码文件)，再按上面的操作配置源码文件即可。  
+	如果是第三方的类库，则需要下载第三方类库源码，再按上面的操作配置源码文件（或文件夹）即可。  
+	完整操作可以看 [这里](http://jingyan.baidu.com/article/f006222805efddfbd2f0c850.html) ^-^
