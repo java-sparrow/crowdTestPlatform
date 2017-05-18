@@ -13,18 +13,15 @@ import javax.servlet.annotation.WebFilter;
  * Servlet Filter implementation class EncodingFilter
  */
 @WebFilter(
-		description = "编码过滤器", 
-		urlPatterns = { 
-				"/login", 
-				"/register"
-		})
-public class EncodingFilter implements Filter {
+		description = "编码过滤器，因为需要提高执行优先级，所以在类名前加了 “A_” ", 
+		urlPatterns = { "/*" })
+public class A_EncodingFilter implements Filter {
 	private static final String DEFAULT_CHARACTER_ENCODING = "utf-8";
 
     /**
      * Default constructor. 
      */
-    public EncodingFilter() {
+    public A_EncodingFilter() {
         // TODO Auto-generated constructor stub
     }
 
