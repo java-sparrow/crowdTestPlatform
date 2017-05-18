@@ -2,8 +2,6 @@ package main.java.bo;
 
 import java.sql.Timestamp;
 
-import main.java.constant.TaskStatus;
-
 /**
  * 任务表 记录映射类
  *
@@ -44,7 +42,7 @@ public class TaskBo extends BaseBo {
 	/**
 	 * 任务状态
 	 */
-	private TaskStatus taskStatus;
+	private int taskStatus;
 	/**
 	 * 创建日期
 	 */
@@ -118,10 +116,10 @@ public class TaskBo extends BaseBo {
 	public void setTaskFileUrl(String taskFileUrl) {
 		this.taskFileUrl = taskFileUrl;
 	}
-	public TaskStatus getTaskStatus() {
+	public int getTaskStatus() {
 		return taskStatus;
 	}
-	public void setTaskStatus(TaskStatus taskStatus) {
+	public void setTaskStatus(int taskStatus) {
 		this.taskStatus = taskStatus;
 	}
 	public Timestamp getCreateTime() {
