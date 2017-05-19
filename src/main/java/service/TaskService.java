@@ -28,6 +28,27 @@ public class TaskService extends BaseService {
 	public TaskBo queryTaskById(Integer id) {
 		return taskDao.queryTaskById(id);
 	}
+	/**
+	 * 根据 任务id 查找
+	 * @param id 任务id
+	 * @return 匹配查询结果的任务对象。
+	 * 			<br>当无查询结果 或 发生异常 或 参数为null 或 参数无法转成整型值时，返回 null
+	 */
+	public TaskBo queryTaskById(String id) {
+		if (id == null) {
+			return null;
+		}
+		
+		int taskId;
+		
+		try {
+			taskId = Integer.valueOf(id);
+		} catch (NumberFormatException e) {
+			return null;
+		}
+		
+		return queryTaskById(taskId);
+	}
 
 	/**
 	 * 新增任务
