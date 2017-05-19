@@ -1,6 +1,9 @@
 package main.java.bo;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
+
+import main.java.util.MyUtil;
 
 /**
  * 任务表 记录映射类
@@ -46,7 +49,7 @@ public class TaskBo extends BaseBo {
 	/**
 	 * 创建日期
 	 */
-	private Timestamp createTime;
+	private LocalDateTime createTime;
 	/**
 	 * 发布任务的用户id
 	 */
@@ -54,7 +57,7 @@ public class TaskBo extends BaseBo {
 	/**
 	 * 任务截止的交付时间
 	 */
-	private Timestamp deadlineTime;
+	private LocalDateTime deadlineTime;
 	/**
 	 * 承接任务的用户id
 	 */
@@ -62,11 +65,11 @@ public class TaskBo extends BaseBo {
 	/**
 	 * 任务完成时的时间
 	 */
-	private Timestamp finishTime;
+	private LocalDateTime finishTime;
 	/**
 	 * 任务审批的时间
 	 */
-	private Timestamp approveTime;
+	private LocalDateTime approveTime;
 	
 	public int getId() {
 		return id;
@@ -122,11 +125,17 @@ public class TaskBo extends BaseBo {
 	public void setTaskStatus(int taskStatus) {
 		this.taskStatus = taskStatus;
 	}
-	public Timestamp getCreateTime() {
+	public LocalDateTime getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(LocalDateTime createTime) {
 		this.createTime = createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = MyUtil.toLocalDateTime(createTime);
+	}
+	public void setCreateTime(long createTime) {
+		this.createTime = MyUtil.toLocalDateTime(createTime);
 	}
 	public int getPublishUserId() {
 		return publishUserId;
@@ -134,11 +143,17 @@ public class TaskBo extends BaseBo {
 	public void setPublishUserId(int publishUserId) {
 		this.publishUserId = publishUserId;
 	}
-	public Timestamp getDeadlineTime() {
+	public LocalDateTime getDeadlineTime() {
 		return deadlineTime;
 	}
-	public void setDeadlineTime(Timestamp deadlineTime) {
+	public void setDeadlineTime(LocalDateTime deadlineTime) {
 		this.deadlineTime = deadlineTime;
+	}
+	public void setDeadlineTime(Date deadlineTime) {
+		this.deadlineTime = MyUtil.toLocalDateTime(deadlineTime);
+	}
+	public void setDeadlineTime(long deadlineTime) {
+		this.deadlineTime = MyUtil.toLocalDateTime(deadlineTime);
 	}
 	public Integer getAcceptUserId() {
 		return acceptUserId;
@@ -146,16 +161,28 @@ public class TaskBo extends BaseBo {
 	public void setAcceptUserId(Integer acceptUserId) {
 		this.acceptUserId = acceptUserId;
 	}
-	public Timestamp getFinishTime() {
+	public LocalDateTime getFinishTime() {
 		return finishTime;
 	}
-	public void setFinishTime(Timestamp finishTime) {
+	public void setFinishTime(LocalDateTime finishTime) {
 		this.finishTime = finishTime;
 	}
-	public Timestamp getApproveTime() {
+	public void setFinishTime(Date finishTime) {
+		this.finishTime = MyUtil.toLocalDateTime(finishTime);
+	}
+	public void setFinishTime(long finishTime) {
+		this.finishTime = MyUtil.toLocalDateTime(finishTime);
+	}
+	public LocalDateTime getApproveTime() {
 		return approveTime;
 	}
-	public void setApproveTime(Timestamp approveTime) {
+	public void setApproveTime(LocalDateTime approveTime) {
 		this.approveTime = approveTime;
+	}
+	public void setApproveTime(Date approveTime) {
+		this.approveTime = MyUtil.toLocalDateTime(approveTime);
+	}
+	public void setApproveTime(long approveTime) {
+		this.approveTime = MyUtil.toLocalDateTime(approveTime);
 	}
 }
