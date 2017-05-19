@@ -164,8 +164,8 @@ public class TaskDao extends BaseDao {
 	public Boolean addTask(TaskBo taskData) {
 		Boolean isInserted = false;
 		String sql = "insert into " + tableName
-				+ " (`task_name`, `task_detail`, `task_img_url`, `project_description`, `project_comment`, `test_requirement`, `task_file_url`, `publish_user_id`)"
-				+ " values (?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " (`task_name`, `task_detail`, `task_img_url`, `project_description`, `project_comment`, `test_requirement`, `task_file_url`, `publish_user_id`, `deadline_time`)"
+				+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 			preparedStatement.setString(1, taskData.getTaskName());
@@ -176,6 +176,7 @@ public class TaskDao extends BaseDao {
 			preparedStatement.setString(6, taskData.getTestRequirement());
 			preparedStatement.setString(7, taskData.getTaskFileUrl());
 			preparedStatement.setInt(8, taskData.getPublishUserId());
+			preparedStatement.setObject(9, taskData.getDeadlineTime());
 			
 			int resultRows = preparedStatement.executeUpdate();
 			

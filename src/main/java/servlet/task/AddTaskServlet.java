@@ -52,6 +52,26 @@ public class AddTaskServlet extends HttpServlet {
 			return;
 		}
 		
+		String deadlineTime = request.getParameter("deadlineTime");
+
+		if (MyUtil.isEmptyString(deadlineTime)) {
+			APIObject apiObject = new APIObject("截至时间不能为空");
+			
+			response.getWriter().append(apiObject.toJSON());
+			return;
+		}
+		
+		long deadlineTimestamp;
+		
+		try {
+			deadlineTimestamp = Long.valueOf(deadlineTime);
+		} catch (NumberFormatException e) {
+			APIObject apiObject = new APIObject("截至时间格式不正确");
+			
+			response.getWriter().append(apiObject.toJSON());
+			return;
+		}
+		
 		TaskBo taskBo = new TaskBo();
 		taskBo.setTaskName(taskName);
 		taskBo.setTaskDetail(request.getParameter("taskDetail"));
@@ -60,6 +80,7 @@ public class AddTaskServlet extends HttpServlet {
 		taskBo.setProjectComment(request.getParameter("projectComment"));
 		taskBo.setTestRequirement(request.getParameter("testRequirement"));
 		taskBo.setTaskFileUrl(request.getParameter("taskFileUrl"));
+		taskBo.setDeadlineTime(deadlineTimestamp);
 		// 登录用户的id从request的属性中获取
 		taskBo.setPublishUserId((int) request.getAttribute(SessionAttributeConst.LOGIN_USER_ID_FIELD_NAME));
 		
