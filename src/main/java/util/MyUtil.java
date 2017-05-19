@@ -56,10 +56,10 @@ public class MyUtil {
 	/**
 	 * 接收一个 Date 日期时间对象，转换为一个 LocalDateTime 对象 并返回
 	 * @param date 日期时间对象，如 从数据库中取得的 java.sql.Timestamp 类型
-	 * @return 转换后的对象
+	 * @return 如果参数为null，则返回null。不为null则返回转换后的对象
 	 */
 	public static LocalDateTime toLocalDateTime(Date date) {
-		return LocalDateTime.ofInstant(date.toInstant(), LOCAL_ZONE_ID);
+		return (date == null) ? null : LocalDateTime.ofInstant(date.toInstant(), LOCAL_ZONE_ID);
 	}
 	/**
 	 * 接收一个 数值型的时间戳对象，转换为一个 LocalDateTime 对象 并返回
