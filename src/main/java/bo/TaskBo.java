@@ -58,7 +58,7 @@ public class TaskBo extends BaseBo {
 	/**
 	 * 承接任务的用户id
 	 */
-	private int acceptUserId;
+	private Integer acceptUserId;
 	/**
 	 * 任务完成时的时间
 	 */
@@ -140,10 +140,10 @@ public class TaskBo extends BaseBo {
 	public void setDeadlineTime(Timestamp deadlineTime) {
 		this.deadlineTime = deadlineTime;
 	}
-	public int getAcceptUserId() {
+	public Integer getAcceptUserId() {
 		return acceptUserId;
 	}
-	public void setAcceptUserId(int acceptUserId) {
+	public void setAcceptUserId(Integer acceptUserId) {
 		this.acceptUserId = acceptUserId;
 	}
 	public Timestamp getFinishTime() {
