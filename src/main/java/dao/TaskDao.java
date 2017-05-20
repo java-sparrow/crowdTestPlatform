@@ -128,6 +128,56 @@ public class TaskDao extends BaseDao {
 		
 		return taskList;
 	}
+	/**
+	 * 根据参数 查询任务列表
+	 * <br>TODO: 支持分页
+	 * @param queryData 查询数据对象，根据该对象的 taskStatus、publishUserId、acceptUserId 的值（允许多个值同时存在）来查询
+	 * @return 任务对象列表。
+	 * 			<br>当无查询结果 或 发生异常时，返回 空数组
+	 */
+	public ArrayList<TaskBo> queryTaskList(TaskBo queryData) {
+		Integer queryTaskStatus = queryData.getTaskStatus();
+		Integer queryPublishUserId = queryData.getPublishUserId();
+		Integer queryAcceptUserId = queryData.getAcceptUserId();
+		
+		String sql = "select * from " + tableName + " where 1 = 1";
+		
+		if (queryTaskStatus != null) {
+			sql += " and `task_status` = ?";
+		}
+		if (queryPublishUserId != null) {
+			sql += " and `publish_user_id` = ?";
+		}
+		if (queryAcceptUserId != null) {
+			sql += " and `accept_user_id` = ?";
+		}
+		
+		ArrayList<TaskBo> taskList = new ArrayList<>();
+		
+		try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			int queryFieldCount = 0;
+			
+			if (queryTaskStatus != null) {
+				preparedStatement.setInt(++queryFieldCount, queryTaskStatus);
+			}
+			if (queryPublishUserId != null) {
+				preparedStatement.setInt(++queryFieldCount, queryPublishUserId);
+			}
+			if (queryAcceptUserId != null) {
+				preparedStatement.setInt(++queryFieldCount, queryAcceptUserId);
+			}
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			taskList = getListFromResultSet(resultSet);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return taskList;
+	}
 
 	/**
 	 * 根据 任务id 查找
