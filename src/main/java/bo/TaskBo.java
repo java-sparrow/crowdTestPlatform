@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import main.java.constant.TaskStatus;
-import main.java.util.MyUtil;
 
 /**
  * 任务表 记录映射类
@@ -133,10 +132,10 @@ public class TaskBo extends BaseBo {
 		this.createTime = createTime;
 	}
 	public void setCreateTime(Date createTime) {
-		this.createTime = MyUtil.toLocalDateTime(createTime);
+		this.createTime = toLocalDateTime(createTime);
 	}
 	public void setCreateTime(long createTime) {
-		this.createTime = MyUtil.toLocalDateTime(createTime);
+		this.createTime = toLocalDateTime(createTime);
 	}
 	public Integer getPublishUserId() {
 		return publishUserId;
@@ -151,10 +150,10 @@ public class TaskBo extends BaseBo {
 		this.deadlineTime = deadlineTime;
 	}
 	public void setDeadlineTime(Date deadlineTime) {
-		this.deadlineTime = MyUtil.toLocalDateTime(deadlineTime);
+		this.deadlineTime = toLocalDateTime(deadlineTime);
 	}
 	public void setDeadlineTime(long deadlineTime) {
-		this.deadlineTime = MyUtil.toLocalDateTime(deadlineTime);
+		this.deadlineTime = toLocalDateTime(deadlineTime);
 	}
 	public Integer getAcceptUserId() {
 		return acceptUserId;
@@ -169,10 +168,10 @@ public class TaskBo extends BaseBo {
 		this.finishTime = finishTime;
 	}
 	public void setFinishTime(Date finishTime) {
-		this.finishTime = MyUtil.toLocalDateTime(finishTime);
+		this.finishTime = toLocalDateTime(finishTime);
 	}
 	public void setFinishTime(long finishTime) {
-		this.finishTime = MyUtil.toLocalDateTime(finishTime);
+		this.finishTime = toLocalDateTime(finishTime);
 	}
 	public LocalDateTime getApproveTime() {
 		return approveTime;
@@ -181,10 +180,10 @@ public class TaskBo extends BaseBo {
 		this.approveTime = approveTime;
 	}
 	public void setApproveTime(Date approveTime) {
-		this.approveTime = MyUtil.toLocalDateTime(approveTime);
+		this.approveTime = toLocalDateTime(approveTime);
 	}
 	public void setApproveTime(long approveTime) {
-		this.approveTime = MyUtil.toLocalDateTime(approveTime);
+		this.approveTime = toLocalDateTime(approveTime);
 	}
 	
 	// 一些业务方法
