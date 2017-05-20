@@ -63,6 +63,10 @@ public class TaskBo extends BaseBo {
 	 */
 	private Integer acceptUserId;
 	/**
+	 * 任务被领取的时间
+	 */
+	private LocalDateTime acceptTime;
+	/**
 	 * 任务完成时的时间
 	 */
 	private LocalDateTime finishTime;
@@ -160,6 +164,18 @@ public class TaskBo extends BaseBo {
 	}
 	public void setAcceptUserId(Integer acceptUserId) {
 		this.acceptUserId = acceptUserId;
+	}
+	public LocalDateTime getAcceptTime() {
+		return acceptTime;
+	}
+	public void setAcceptTime(LocalDateTime acceptTime) {
+		this.acceptTime = acceptTime;
+	}
+	public void setAcceptTime(Date acceptTime) {
+		this.acceptTime = toLocalDateTime(acceptTime);
+	}
+	public void setAcceptTime(long acceptTime) {
+		this.acceptTime = toLocalDateTime(acceptTime);
 	}
 	public LocalDateTime getFinishTime() {
 		return finishTime;

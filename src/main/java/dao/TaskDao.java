@@ -45,6 +45,7 @@ public class TaskDao extends BaseDao {
 		taskBo.setPublishUserId(resultSet.getInt("publish_user_id"));
 		taskBo.setDeadlineTime(resultSet.getTimestamp("deadline_time"));
 		taskBo.setAcceptUserId(resultSet.getInt("accept_user_id"));
+		taskBo.setAcceptTime(resultSet.getTimestamp("accept_time"));
 		taskBo.setFinishTime(resultSet.getTimestamp("finish_time"));
 		taskBo.setApproveTime(resultSet.getTimestamp("approve_time"));
 		
@@ -254,7 +255,7 @@ public class TaskDao extends BaseDao {
 		String sql = "update " + tableName
 				+ " set `task_name`=?, `task_detail`=?, `task_img_url`=?"
 				+ ", `project_description`=?, `project_comment`=?, `test_requirement`=?, `task_file_url`=?"
-				+ ", `task_status`=?, `deadline_time`=?, `accept_user_id`=?, `finish_time`=?, `approve_time`=?"
+				+ ", `task_status`=?, `deadline_time`=?, `accept_user_id`=?, `accept_time`=?, `finish_time`=?, `approve_time`=?"
 				+ " where `id`=?";
 		
 		try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -270,10 +271,11 @@ public class TaskDao extends BaseDao {
 			preparedStatement.setInt(8, taskData.getTaskStatus());
 			preparedStatement.setObject(9, taskData.getDeadlineTime());
 			preparedStatement.setInt(10, taskData.getAcceptUserId());
-			preparedStatement.setObject(11, taskData.getFinishTime());
-			preparedStatement.setObject(12, taskData.getApproveTime());
+			preparedStatement.setObject(11, taskData.getAcceptTime());
+			preparedStatement.setObject(12, taskData.getFinishTime());
+			preparedStatement.setObject(13, taskData.getApproveTime());
 			
-			preparedStatement.setInt(13, taskData.getId());
+			preparedStatement.setInt(14, taskData.getId());
 
 			int resultRows = preparedStatement.executeUpdate();
 			
