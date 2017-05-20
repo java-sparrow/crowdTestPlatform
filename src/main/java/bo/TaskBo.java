@@ -3,6 +3,7 @@ package main.java.bo;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import main.java.constant.TaskStatus;
 import main.java.util.MyUtil;
 
 /**
@@ -184,5 +185,36 @@ public class TaskBo extends BaseBo {
 	}
 	public void setApproveTime(long approveTime) {
 		this.approveTime = MyUtil.toLocalDateTime(approveTime);
+	}
+	
+	// 一些业务方法
+
+	/**
+	 * 任务是否 可领取
+	 * @return true：可领取。false 不可再次领取
+	 */
+	public Boolean isAcceptable() {
+		return taskStatus == TaskStatus.CREATED_CODE;
+	}
+	/**
+	 * 任务是否 可提交（测试）
+	 * @return true：可提交（测试）。false 不可提交（测试）
+	 */
+	public Boolean isCanBeSubmitted() {
+		return (taskStatus == TaskStatus.ACCEPTED_CODE) || (taskStatus == TaskStatus.APPROVED_REJECT_CODE);
+	}
+	/**
+	 * 任务是否 可审批
+	 * @return true：可审批。false 不可审批
+	 */
+	public Boolean isApprovable() {
+		return taskStatus  == TaskStatus.WAIT_APPROVE_CODE;
+	}
+	/**
+	 * 任务是否 不可改变
+	 * @return true：不可改变。false 可以改变
+	 */
+	public Boolean isImmutable() {
+		return taskStatus == TaskStatus.APPROVED_PASS_CODE;
 	}
 }
