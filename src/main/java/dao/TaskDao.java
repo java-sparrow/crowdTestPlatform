@@ -241,4 +241,51 @@ public class TaskDao extends BaseDao {
 		
 		return isInserted;
 	}
+	
+	/**
+	 * 更新任务
+	 * @param taskData 新的任务数据对象
+	 * @return 更新成功时，返回 true。<br>
+	 * 			更新失败时，返回 false。
+	 */
+	public Boolean updateTask(TaskBo taskData) {
+		Boolean isUpdated = false;
+		
+		String sql = "update " + tableName
+				+ " set `task_name`=?, `task_detail`=?, `task_img_url`=?"
+				+ ", `project_description`=?, `project_comment`=?, `test_requirement`=?, `task_file_url`=?"
+				+ ", `task_status`=?, `deadline_time`=?, `accept_user_id`=?, `finish_time`=?, `approve_time`=?"
+				+ " where `id`=?";
+		
+		try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setString(1, taskData.getTaskName());
+			preparedStatement.setString(2, taskData.getTaskDetail());
+			preparedStatement.setString(3, taskData.getTaskImgUrl());
+			
+			preparedStatement.setString(4, taskData.getProjectDescription());
+			preparedStatement.setString(5, taskData.getProjectComment());
+			preparedStatement.setString(6, taskData.getTestRequirement());
+			preparedStatement.setString(7, taskData.getTaskFileUrl());
+			
+			preparedStatement.setInt(8, taskData.getTaskStatus());
+			preparedStatement.setObject(9, taskData.getDeadlineTime());
+			preparedStatement.setInt(10, taskData.getAcceptUserId());
+			preparedStatement.setObject(11, taskData.getFinishTime());
+			preparedStatement.setObject(12, taskData.getApproveTime());
+			
+			preparedStatement.setInt(13, taskData.getId());
+
+			int resultRows = preparedStatement.executeUpdate();
+			
+			if (resultRows == 1) {
+				isUpdated = true;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return isUpdated;
+	}
 }

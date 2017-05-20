@@ -101,4 +101,14 @@ public class TaskService extends BaseService {
 	public Boolean addTask(TaskBo taskData) {
 		return taskDao.addTask(taskData);
 	}
+	
+	/**
+	 * 更新任务
+	 * @param taskData 新的任务数据对象
+	 * @return 更新成功时，返回 true。<br>
+	 * 			更新失败时，返回 false。
+	 */
+	public Boolean updateTask(TaskBo taskData) {
+		return taskDao.updateTask(taskData);
+	}
 }
