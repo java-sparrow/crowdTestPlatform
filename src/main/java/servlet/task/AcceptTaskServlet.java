@@ -37,17 +37,13 @@ public class AcceptTaskServlet extends HttpServlet {
 		TaskBo taskBo = taskService.queryTaskById(taskId);
 		
 		if (taskBo == null) {
-			APIObject apiObject = new APIObject("该任务不存在，请检查任务id");
-			
-			response.getWriter().append(apiObject.toJSON());
+			ServletUtil.outputJSON(response, "该任务不存在，请检查任务id");
 			
 			return;
 		}
 		
 		if (!taskBo.isAcceptable()) {
-			APIObject apiObject = new APIObject("该任务不可领取，请检查任务id");
-			
-			response.getWriter().append(apiObject.toJSON());
+			ServletUtil.outputJSON(response, "该任务不可领取，请检查任务id");
 			
 			return;
 		}
@@ -61,7 +57,7 @@ public class AcceptTaskServlet extends HttpServlet {
 			apiObject.setMessage("领取任务成功");
 		}
 		
-		response.getWriter().append(apiObject.toJSON());
+		ServletUtil.outputJSON(response, apiObject);
 	}
 
 	/**

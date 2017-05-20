@@ -34,9 +34,7 @@ public class AddTaskServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		APIObject apiObject = new APIObject("请使用 POST 方式操作");
-		
-		response.getWriter().append(apiObject.toJSON());
+		ServletUtil.outputJSON(response, "请使用 POST 方式操作");
 	}
 
 	/**
@@ -46,18 +44,16 @@ public class AddTaskServlet extends HttpServlet {
 		String taskName = request.getParameter("taskName");
 		
 		if (MyUtil.isEmptyString(taskName)) {
-			APIObject apiObject = new APIObject("任务名不能为空");
+			ServletUtil.outputJSON(response, "任务名不能为空");
 			
-			response.getWriter().append(apiObject.toJSON());
 			return;
 		}
 		
 		String deadlineTime = request.getParameter("deadlineTime");
 
 		if (MyUtil.isEmptyString(deadlineTime)) {
-			APIObject apiObject = new APIObject("截至时间不能为空");
+			ServletUtil.outputJSON(response, "截至时间不能为空");
 			
-			response.getWriter().append(apiObject.toJSON());
 			return;
 		}
 		
@@ -66,9 +62,8 @@ public class AddTaskServlet extends HttpServlet {
 		try {
 			deadlineTimestamp = Long.valueOf(deadlineTime);
 		} catch (NumberFormatException e) {
-			APIObject apiObject = new APIObject("截至时间格式不正确");
+			ServletUtil.outputJSON(response, "截至时间格式不正确");
 			
-			response.getWriter().append(apiObject.toJSON());
 			return;
 		}
 		
@@ -93,7 +88,7 @@ public class AddTaskServlet extends HttpServlet {
 			apiObject.setMessage("新增任务成功");
 		}
 		
-		response.getWriter().append(apiObject.toJSON());
+		ServletUtil.outputJSON(response, apiObject);
 	}
 
 }

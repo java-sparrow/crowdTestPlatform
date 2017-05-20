@@ -11,6 +11,7 @@ import main.java.bo.UserBo;
 import main.java.service.UserService;
 import main.java.util.APIObject;
 import main.java.util.MyUtil;
+import main.java.util.ServletUtil;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -33,9 +34,7 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		APIObject apiObject = new APIObject("请使用 POST 方式注册");
-		
-		response.getWriter().append(apiObject.toJSON());
+		ServletUtil.outputJSON(response, "请使用 POST 方式注册");
 	}
 
 	/**
@@ -68,8 +67,8 @@ public class RegisterServlet extends HttpServlet {
 			apiObject = new APIObject();
 			apiObject.setMessage("注册成功");
 		}
-		
-		response.getWriter().append(apiObject.toJSON());
+
+		ServletUtil.outputJSON(response, apiObject);
 	}
 
 }

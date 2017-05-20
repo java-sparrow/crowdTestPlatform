@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import main.java.bo.TaskBo;
 import main.java.service.TaskService;
 import main.java.util.APIObject;
+import main.java.util.ServletUtil;
 
 /**
  * Servlet implementation class GetTaskListServlet
@@ -47,7 +48,7 @@ public class GetTaskListServlet extends HttpServlet {
 		APIObject apiObject = new APIObject();
 		apiObject.setData(dataMap);
 
-		response.getWriter().append(apiObject.toJSON());
+		ServletUtil.outputJSON(response, apiObject);
 	}
 
 	/**

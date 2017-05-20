@@ -33,9 +33,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		APIObject apiObject = new APIObject("请使用 POST 方式登录");
-		
-		response.getWriter().append(apiObject.toJSON());
+		ServletUtil.outputJSON(response,"请使用 POST 方式登录" );
 	}
 
 	/**
@@ -58,15 +56,13 @@ public class LoginServlet extends HttpServlet {
 			
 			APIObject apiObject = new APIObject();
 			apiObject.setMessage("登录成功");
-			
-			response.getWriter().append(apiObject.toJSON());
+
+			ServletUtil.outputJSON(response, apiObject);
 		}
 		else {
 			System.out.println("登录失败");
-			
-			APIObject apiObject = new APIObject("用户名或密码错误，请重新登录");
-			
-			response.getWriter().append(apiObject.toJSON());
+
+			ServletUtil.outputJSON(response, "用户名或密码错误，请重新登录");
 		}
 	}
 

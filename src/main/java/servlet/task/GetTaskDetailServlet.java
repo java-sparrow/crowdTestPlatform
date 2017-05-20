@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import main.java.bo.TaskBo;
 import main.java.service.TaskService;
 import main.java.util.APIObject;
+import main.java.util.ServletUtil;
 
 /**
  * Servlet implementation class GetTaskDetailServlet
@@ -36,9 +37,7 @@ public class GetTaskDetailServlet extends HttpServlet {
 		TaskBo taskBo = taskService.queryTaskById(taskId);
 		
 		if (taskBo == null) {
-			APIObject apiObject = new APIObject("该任务不存在，请检查任务id");
-			
-			response.getWriter().append(apiObject.toJSON());
+			ServletUtil.outputJSON(response, "该任务不存在，请检查任务id");
 			
 			return;
 		}
@@ -46,7 +45,7 @@ public class GetTaskDetailServlet extends HttpServlet {
 		APIObject apiObject = new APIObject();
 		apiObject.setData(taskBo);
 
-		response.getWriter().append(apiObject.toJSON());
+		ServletUtil.outputJSON(response, apiObject);
 	}
 
 	/**

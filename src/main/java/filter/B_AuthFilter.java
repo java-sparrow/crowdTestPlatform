@@ -9,6 +9,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import main.java.bo.UserBo;
 import main.java.util.APIObject;
 import main.java.util.ServletUtil;
@@ -44,9 +46,7 @@ public class B_AuthFilter implements Filter {
 		if (loginUser == null) {
 			System.out.println("权限校验【不通过】");
 			
-			APIObject apiObject = new APIObject("请先登录");
-			
-			response.getWriter().append(apiObject.toJSON());
+			ServletUtil.outputJSON((HttpServletResponse) response, "请先登录");
 			
 			return;
 		}
