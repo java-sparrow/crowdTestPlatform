@@ -18,6 +18,48 @@ public class TaskService extends BaseService {
 	public ArrayList<TaskBo> queryTaskList() {
 		return taskDao.queryTaskList();
 	}
+	/**
+	 * 根据任务状态 查询任务列表
+	 * <br>TODO: 支持分页
+	 * @param status 任务状态
+	 * @return 符合条件的任务对象列表。
+	 * 			<br>当无符合条件的结果 或 发生异常时，返回 空数组
+	 */
+	public ArrayList<TaskBo> queryTaskListByStatus(Integer status) {
+		TaskBo queryData = new TaskBo();
+		
+		queryData.setTaskStatus(status);
+		
+		return taskDao.queryTaskList(queryData);
+	}
+	/**
+	 * 根据任务发布者 查询任务列表
+	 * <br>TODO: 支持分页
+	 * @param publishUserId 任务发布者
+	 * @return 符合条件的任务对象列表。
+	 * 			<br>当无符合条件的结果 或 发生异常时，返回 空数组
+	 */
+	public ArrayList<TaskBo> queryTaskListByPublisher(Integer publishUserId) {
+		TaskBo queryData = new TaskBo();
+		
+		queryData.setPublishUserId(publishUserId);
+		
+		return taskDao.queryTaskList(queryData);
+	}
+	/**
+	 * 根据任务承接者 查询任务列表
+	 * <br>TODO: 支持分页
+	 * @param acceptUserId 任务承接者
+	 * @return 符合条件的任务对象列表。
+	 * 			<br>当无符合条件的结果 或 发生异常时，返回 空数组
+	 */
+	public ArrayList<TaskBo> queryTaskListByAccepter(Integer acceptUserId) {
+		TaskBo queryData = new TaskBo();
+		
+		queryData.setAcceptUserId(acceptUserId);
+		
+		return taskDao.queryTaskList(queryData);
+	}
 	
 	/**
 	 * 根据 任务id 查找
