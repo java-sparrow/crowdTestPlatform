@@ -1,8 +1,10 @@
 package main.java.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import main.java.bo.TaskBo;
+import main.java.constant.TaskStatus;
 import main.java.dao.TaskDao;
 
 public class TaskService extends BaseService {
@@ -110,5 +112,25 @@ public class TaskService extends BaseService {
 	 */
 	public Boolean updateTask(TaskBo taskData) {
 		return taskDao.updateTask(taskData);
+	}
+	/**
+	 * 领取任务
+	 * @param taskId 任务id
+	 * @param acceptUserId 承接任务的用户id
+	 * @return 领取任务成功时，返回 true。<br>
+	 * 			领取任务失败时，返回 false。
+	 */
+	public Boolean acceptTask(int taskId, int acceptUserId) {
+		TaskBo taskBo = queryTaskById(taskId);
+		
+		if (taskBo == null) {
+			return false;
+		}
+		
+		taskBo.setAcceptUserId(acceptUserId);
+		taskBo.setTaskStatus(TaskStatus.ACCEPTED_CODE);
+		taskBo.setAcceptTime(new Date());
+		
+		return updateTask(taskBo);
 	}
 }
