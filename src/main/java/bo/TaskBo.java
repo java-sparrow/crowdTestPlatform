@@ -45,7 +45,7 @@ public class TaskBo extends BaseBo {
 	/**
 	 * 任务状态
 	 */
-	private int taskStatus;
+	private Integer taskStatus;
 	/**
 	 * 创建日期
 	 */
@@ -53,7 +53,7 @@ public class TaskBo extends BaseBo {
 	/**
 	 * 发布任务的用户id
 	 */
-	private int publishUserId;
+	private Integer publishUserId;
 	/**
 	 * 任务截止的交付时间
 	 */
@@ -119,10 +119,10 @@ public class TaskBo extends BaseBo {
 	public void setTaskFileUrl(String taskFileUrl) {
 		this.taskFileUrl = taskFileUrl;
 	}
-	public int getTaskStatus() {
+	public Integer getTaskStatus() {
 		return taskStatus;
 	}
-	public void setTaskStatus(int taskStatus) {
+	public void setTaskStatus(Integer taskStatus) {
 		this.taskStatus = taskStatus;
 	}
 	public LocalDateTime getCreateTime() {
@@ -137,10 +137,10 @@ public class TaskBo extends BaseBo {
 	public void setCreateTime(long createTime) {
 		this.createTime = MyUtil.toLocalDateTime(createTime);
 	}
-	public int getPublishUserId() {
+	public Integer getPublishUserId() {
 		return publishUserId;
 	}
-	public void setPublishUserId(int publishUserId) {
+	public void setPublishUserId(Integer publishUserId) {
 		this.publishUserId = publishUserId;
 	}
 	public LocalDateTime getDeadlineTime() {
