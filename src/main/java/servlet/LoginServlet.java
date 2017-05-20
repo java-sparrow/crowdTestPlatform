@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.bo.UserBo;
-import main.java.constant.SessionAttributeConst;
 import main.java.service.UserService;
 import main.java.util.APIObject;
+import main.java.util.ServletUtil;
 
 /**
  * Servlet implementation class LoginServlet
@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 		if (loginUser != null) {
 			System.out.printf("用户 [%s] 登录成功 \n", userData.getUsername());
 			
-			request.getSession().setAttribute(SessionAttributeConst.LOGIN_USER_FIELD_NAME, loginUser);
+			ServletUtil.setLoginUserToSessionAttribute(request, loginUser);
 			
 			APIObject apiObject = new APIObject();
 			apiObject.setMessage("登录成功");

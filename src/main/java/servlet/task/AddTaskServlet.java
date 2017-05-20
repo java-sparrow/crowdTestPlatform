@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.bo.TaskBo;
-import main.java.constant.SessionAttributeConst;
 import main.java.service.TaskService;
 import main.java.util.APIObject;
 import main.java.util.MyUtil;
+import main.java.util.ServletUtil;
 
 /**
  * Servlet implementation class AddTaskServlet
@@ -82,7 +82,7 @@ public class AddTaskServlet extends HttpServlet {
 		taskBo.setTaskFileUrl(request.getParameter("taskFileUrl"));
 		taskBo.setDeadlineTime(deadlineTimestamp);
 		// 登录用户的id从request的属性中获取
-		taskBo.setPublishUserId((int) request.getAttribute(SessionAttributeConst.LOGIN_USER_ID_FIELD_NAME));
+		taskBo.setPublishUserId(ServletUtil.getLoginUserId(request));
 		
 		APIObject apiObject = new APIObject();
 		
