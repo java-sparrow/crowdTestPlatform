@@ -52,7 +52,7 @@ public class AddTaskServlet extends HttpServlet {
 		String deadlineTime = request.getParameter("deadlineTime");
 
 		if (MyUtil.isEmptyString(deadlineTime)) {
-			ServletUtil.outputJSON(response, "截至时间不能为空");
+			ServletUtil.outputJSON(response, "截止时间不能为空");
 			
 			return;
 		}
@@ -62,7 +62,7 @@ public class AddTaskServlet extends HttpServlet {
 		try {
 			deadlineTimestamp = Long.valueOf(deadlineTime);
 		} catch (NumberFormatException e) {
-			ServletUtil.outputJSON(response, "截至时间格式不正确");
+			ServletUtil.outputJSON(response, "截止时间格式不正确");
 			
 			return;
 		}
