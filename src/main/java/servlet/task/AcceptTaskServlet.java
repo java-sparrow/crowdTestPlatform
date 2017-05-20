@@ -33,6 +33,13 @@ public class AcceptTaskServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ServletUtil.outputJSON(response, "请使用 POST 方式提交");
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String taskId = request.getParameter("id");
 		TaskBo taskBo = taskService.queryTaskById(taskId);
 		
@@ -58,13 +65,6 @@ public class AcceptTaskServlet extends HttpServlet {
 		}
 		
 		ServletUtil.outputJSON(response, apiObject);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }
