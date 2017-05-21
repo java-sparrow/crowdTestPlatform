@@ -42,6 +42,17 @@ public class ServletUtil {
 		session.setAttribute(SessionAttributeConst.LOGIN_USER_ID_FIELD_NAME, loginUser.getId());
 	}
 	/**
+	 * 从 session对象的属性中 删除 登录用户对象 和 登录用户id
+	 * @param request doGet/doPost 中的 HttpServletRequest 对象，用来获取 session对象
+	 */
+	public static void removeLoginUserFromSessionAttribute(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		session.removeAttribute(SessionAttributeConst.LOGIN_USER_FIELD_NAME);
+		session.removeAttribute(SessionAttributeConst.LOGIN_USER_ID_FIELD_NAME);
+	}
+	
+	/**
 	 * 向 response 流输出 JSON 格式的响应数据。<br>
 	 * 是 <code>response.getWriter().append(apiObject.toJSON());</code> 的快捷方式
 	 * @param response 输出流
