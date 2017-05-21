@@ -1,6 +1,7 @@
 package main.java.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -88,5 +89,45 @@ public class TaskDocDao extends BaseDao {
 		}
 		
 		return taskDocBo;
+	}
+	
+	/**
+	 * 新增 任务文档
+	 * @param taskDocBo 任务文档数据对象
+	 * @return 新增成功时，返回 新记录的id。<br>
+	 * 			新增失败时，返回 null。
+	 */
+	public Integer addTaskDocBo(TaskDocBo taskDocBo) {
+		String sql = "insert into " + tableName
+				+ " (`doc_name`, `doc_url`, `task_id`) values (?, ?, ?)";
+		
+		// 特别注意：如果 connection.prepareStatement 没有加第二个参数，则会报错 Generated keys not requested. 
+		// You need to specify Statement.RETURN_GENERATED_KEYS to Statement.executeUpdate(), Statement.executeLargeUpdate() or Connection.prepareStatement().
+		try (PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+			preparedStatement.setString(1, taskDocBo.getDocName());
+			preparedStatement.setString(2, taskDocBo.getDocUrl());
+			preparedStatement.setInt(3, taskDocBo.getTaskId());
+			
+			int resultRows = preparedStatement.executeUpdate();
+			
+			if (resultRows != 1) {
+				System.out.println("新增 任务文档 失败！");
+				
+				return null;
+			}
+			
+			ResultSet resultSet = preparedStatement.getGeneratedKeys();
+			
+			// 获取新记录返回的id
+			if (resultSet.next()) {
+				return resultSet.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }
