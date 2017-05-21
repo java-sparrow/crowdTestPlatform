@@ -18,3 +18,13 @@ Q: 创建外键时，出现 `Cannot add foreign key constraint` 提示怎么解�
 
 Q: 创建外键时，出现 `Can't write; duplicate key in table` 提示怎么解决？
 > A: 因为 `Foreign Key Name` 是不能重复的，所以检查 SQL语句中 `CONSTRAINT` 后面的名称是否已经在别的地方用过了。
+
+Q: 如何获取 刚插入数据库的新记录的 自增id？
+> A: 再执行一次 `preparedStatement.getGeneratedKeys()` ，然后从返回的 `ResultSet` 对象中获取。
+	详细例子参见 [mysql java使用PreparedStatement插入数据并返回id的代码](http://blog.csdn.net/lishamao/article/details/7189751)
+
+Q: 用 `PrepareStatement` 执行SQL语句时， 控制台提示 `Generated keys not requested. You need to specify Statement.RETURN_GENERATED_KEYS to Statement.executeUpdate(), Statement.executeLargeUpdate() or Connection.prepareStatement().` 是怎么回事？
+> A: `connection.prepareStatement(sql)` 需要加第二个参数，改为 `connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)` 就好了。  
+	详情参见 [MYSQL驱动包升级到5.1.17版本之后会出现的问题：Generated keys not requested. You need to specify Statement.RETURN_GENERATED_KEYS to Statement.execu...](http://blog.csdn.net/shootyou/article/details/6023428)。  
+	另外，官方回复可以见 [这里](https://bugs.mysql.com/bug.php?id=41448)
+

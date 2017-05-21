@@ -7,7 +7,7 @@ Q: 新建或打开文件时，默认编码为 `GBK` ，能不能改为 `UTF-8` �
 Q: 新建jsp文件时，`charset` 和 `pageEncoding` 默认为 `ISO-8859-1` ，能不能改为 `UTF-8` ？
 > A: 在菜单 **Windows** -> **Preferences** 的左上角搜索框中，输入 `encoding` ，接着在 `Web` -> `JSP Files` 面板中，将 `Encoding` 改为 带有 `UTF-8` 的那一项。
 
-Q: 怎么去掉jsp文件第一行的错误 `The superclass "javax.servlet.http.HttpServlet" was not found on the Java Build Path` ？
+Q: 怎么去掉jsp文件第一行的错误 `The superclass "javax.servlet.http.HttpServlet" was not found on the Java Build Path` （或者 当没有jsp文件时，出现在servlet文件中）？
 > A: 图文解答：[百度经验](http://jingyan.baidu.com/article/f79b7cb34f40569144023ef9.html)
 
 Q: 如何添加 **Tomcat** 服务器？
