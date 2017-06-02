@@ -15,4 +15,14 @@ public class UploadFileService extends BaseService {
 	public Integer addUploadFile(UploadFileBo uploadFileData) {
 		return uploadFileDao.addUploadFile(uploadFileData);
 	}
+	
+	/**
+	 * 根据 文件对象id 查找 上传文件对象
+	 * @param fileId 文件对象id
+	 * @return 匹配查询结果的上传文件对象。
+	 * 			<br>当无查询结果 或 发生异常时，返回 null
+	 */
+	public UploadFileBo queryUploadFileById(Integer fileId) {
+		return uploadFileDao.queryUploadFileById(fileId);
+	}
 }
