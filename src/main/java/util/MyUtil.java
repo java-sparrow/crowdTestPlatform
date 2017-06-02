@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Properties;
+import java.util.UUID;
 
 public class MyUtil {
 	/**
@@ -68,5 +69,31 @@ public class MyUtil {
 	 */
 	public static LocalDateTime toLocalDateTime(long timestamp) {
 		return toLocalDateTime(new Date(timestamp));
+	}
+	
+	/**
+	 * 创建一个UUID
+	 * @return UUID
+	 */
+	public static String createUUID() { 
+		// 需要去掉“-”符号
+		return UUID.randomUUID().toString().replaceAll("-", "");
+	}
+	
+	/**
+	 * 根据文件名获取文件后缀名（名字前带有“.”符号）
+	 * @param fileName 文件名
+	 * @return 文件后缀名。如果没有后缀名，则返回空字符串。
+	 */
+	public static String getFileSuffixName(String fileName) {
+		String fileSuffixName = "";
+		
+		String[] fileNameSplits = fileName.split("\\.");
+		
+		if (fileNameSplits.length > 1) {
+			fileSuffixName = "." + fileNameSplits[fileNameSplits.length - 1];
+		}
+		
+		return fileSuffixName;
 	}
 }
