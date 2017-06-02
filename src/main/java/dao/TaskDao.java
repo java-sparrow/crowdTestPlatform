@@ -46,6 +46,7 @@ public class TaskDao extends BaseDao {
 		taskBo.setDeadlineTime(resultSet.getTimestamp("deadline_time"));
 		taskBo.setAcceptUserId(resultSet.getInt("accept_user_id"));
 		taskBo.setAcceptTime(resultSet.getTimestamp("accept_time"));
+		taskBo.setReportFileId(resultSet.getInt("report_file_id"));
 		taskBo.setFinishTime(resultSet.getTimestamp("finish_time"));
 		taskBo.setApproveTime(resultSet.getTimestamp("approve_time"));
 		
@@ -255,7 +256,7 @@ public class TaskDao extends BaseDao {
 		String sql = "update " + tableName
 				+ " set `task_name`=?, `task_detail`=?, `task_img_url`=?"
 				+ ", `project_description`=?, `project_comment`=?, `test_requirement`=?, `task_file_url`=?"
-				+ ", `task_status`=?, `deadline_time`=?, `accept_user_id`=?, `accept_time`=?, `finish_time`=?, `approve_time`=?"
+				+ ", `task_status`=?, `deadline_time`=?, `accept_user_id`=?, `accept_time`=?, `report_file_id`=?, `finish_time`=?, `approve_time`=?"
 				+ " where `id`=?";
 		
 		try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -272,10 +273,12 @@ public class TaskDao extends BaseDao {
 			preparedStatement.setObject(9, taskData.getDeadlineTime());
 			preparedStatement.setInt(10, taskData.getAcceptUserId());
 			preparedStatement.setObject(11, taskData.getAcceptTime());
-			preparedStatement.setObject(12, taskData.getFinishTime());
-			preparedStatement.setObject(13, taskData.getApproveTime());
+			// 因为 报告文件id可能为空，需要设置为null，所以使用setObject而不是setInt（setInt赋值null会报错）
+			preparedStatement.setObject(12, taskData.getReportFileId());
+			preparedStatement.setObject(13, taskData.getFinishTime());
+			preparedStatement.setObject(14, taskData.getApproveTime());
 			
-			preparedStatement.setInt(14, taskData.getId());
+			preparedStatement.setInt(15, taskData.getId());
 
 			int resultRows = preparedStatement.executeUpdate();
 			

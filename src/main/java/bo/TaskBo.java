@@ -67,6 +67,10 @@ public class TaskBo extends BaseBo {
 	 */
 	private LocalDateTime acceptTime;
 	/**
+	 * 测试报告文件id
+	 */
+	private Integer reportFileId;
+	/**
 	 * 任务完成时的时间
 	 */
 	private LocalDateTime finishTime;
@@ -176,6 +180,15 @@ public class TaskBo extends BaseBo {
 	}
 	public void setAcceptTime(long acceptTime) {
 		this.acceptTime = toLocalDateTime(acceptTime);
+	}
+	public Integer getReportFileId() {
+		return reportFileId;
+	}
+	public void setReportFileId(Integer reportFileId) {
+		// 仅当有效值时 才赋值
+		if (reportFileId > 0) {
+			this.reportFileId = reportFileId;
+		}
 	}
 	public LocalDateTime getFinishTime() {
 		return finishTime;
