@@ -133,4 +133,24 @@ public class TaskService extends BaseService {
 		
 		return updateTask(taskBo);
 	}
+
+	/**
+	 * 提交测试报告
+	 * @param taskId 任务id
+	 * @return 改变任务状态成功时，返回 true。<br>
+	 * 			改变任务状态失败时，返回 false。
+	 */
+	public Boolean postReport(int taskId, int reportFileId) {
+		TaskBo taskBo = queryTaskById(taskId);
+		
+		if (taskBo == null) {
+			return false;
+		}
+		
+		taskBo.setTaskStatus(TaskStatus.WAIT_APPROVE_CODE);
+		taskBo.setReportFileId(reportFileId);
+		taskBo.setFinishTime(new Date());
+		
+		return updateTask(taskBo);
+	}
 }
